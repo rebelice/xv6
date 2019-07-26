@@ -46,9 +46,7 @@ _panic(const char *file, int line, const char *fmt,...)
 	va_end(ap);
 
 dead:
-	/* break into the kernel monitor */
-	while (1)
-		monitor(NULL);
+    while(1);
 }
 
 /* like panic, but don't */

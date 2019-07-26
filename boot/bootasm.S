@@ -1,3 +1,5 @@
+#include <sys/mmu.h>
+
 .set PROT_MODE_CSEG,    0x8
 .set PROT_MODE_DSEG,    0x10
 .set CR0_PE_ON,         0x1
@@ -54,3 +56,13 @@ start32:
 spin:
     jmp     spin
 
+# Bootstrap GDT
+.p2align 2                                # force 4 byte alignment
+gdt:
+  SEG_NULL				# null seg
+  SEG(STA_X|STA_R, 0x0, 0xffffffff)	# code seg
+  SEG(STA_W, 0x0, 0xffffffff)	        # data seg
+
+gdtdesc:
+  .word   0x17                            # sizeof(gdt) - 1
+  .long   gdt                             # address gdt
