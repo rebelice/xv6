@@ -1,7 +1,7 @@
 /* See COPYRIGHT for copyright information. */
 
-#include <sys/mmu.h>
-#include <sys/memlayout.h>
+#include <inc/mmu.h>
+#include <inc/memlayout.h>
 
 # Shift Right Logical 
 #define SRL(val, shamt)		(((val) >> (shamt)) & ~(-1 << (32 - (shamt))))

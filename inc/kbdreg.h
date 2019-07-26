@@ -1,5 +1,5 @@
-#ifndef SYS_KBDREG_H
-#define SYS_KBDREG_H
+#ifndef INC_KBDREG_H
+#define INC_KBDREG_H
 
 // Special keycodes
 #define KEY_HOME	0xE0
@@ -80,4 +80,4 @@
 #define	KBR_RSTDONE	0xAA	/* reset complete */
 #define	KBR_ECHO	0xEE	/* echo response */
 
-#endif /* !SYS_KBDREG_H */
+#endif /* !INC_KBDREG_H */

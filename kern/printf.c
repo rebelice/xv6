@@ -1,9 +1,9 @@
 // Simple implementation of cprintf console output for the kernel,
 // based on printfmt() and the kernel console's cputchar().
 
-#include <sys/types.h>
-#include <sys/stdio.h>
-#include <sys/stdarg.h>
+#include <inc/types.h>
+#include <inc/stdio.h>
+#include <inc/stdarg.h>
 
 
 static void

@@ -1,5 +1,5 @@
-#include <sys/stdio.h>
-#include <sys/error.h>
+#include <inc/stdio.h>
+#include <inc/error.h>
 
 #define BUFLEN 1024
 static char buf[BUFLEN];

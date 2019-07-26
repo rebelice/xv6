@@ -1,10 +1,10 @@
 /* See COPYRIGHT for copyright information. */
 
-#include <sys/x86.h>
-#include <sys/memlayout.h>
-#include <sys/kbdreg.h>
-#include <sys/string.h>
-#include <sys/assert.h>
+#include <inc/x86.h>
+#include <inc/memlayout.h>
+#include <inc/kbdreg.h>
+#include <inc/string.h>
+#include <inc/assert.h>
 
 #include <kern/console.h>
 

@@ -1,9 +1,9 @@
-#ifndef SYS_MEMLAYOUT_H
-#define SYS_MEMLAYOUT_H
+#ifndef INC_MEMLAYOUT_H
+#define INC_MEMLAYOUT_H
 
 #ifndef __ASSEMBLER__
-#include <sys/types.h>
-#include <sys/mmu.h>
+#include <inc/types.h>
+#include <inc/mmu.h>
 #endif /* not __ASSEMBLER__ */
 
 /*
@@ -144,4 +144,4 @@ typedef uint32_t pte_t;
 typedef uint32_t pde_t;
 
 #endif /* !__ASSEMBLER__ */
-#endif /* !SYS_MEMLAYOUT_H */
+#endif /* !INC_MEMLAYOUT_H */

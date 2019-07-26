@@ -1,9 +1,7 @@
-/* See COPYRIGHT for copyright information. */
+#ifndef INC_ASSERT_H
+#define INC_ASSERT_H
 
-#ifndef SYS_ASSERT_H
-#define SYS_ASSERT_H
-
-#include <sys/stdio.h>
+#include <inc/stdio.h>
 
 void _warn(const char*, int, const char*, ...);
 void _panic(const char*, int, const char*, ...) __attribute__((noreturn));
@@ -17,4 +15,4 @@ void _panic(const char*, int, const char*, ...) __attribute__((noreturn));
 // static_assert(x) will generate a compile-time error if 'x' is false.
 #define static_assert(x)	switch (x) case 0: case (x):
 
-#endif /* !SYS_ASSERT_H */
+#endif /* !INC_ASSERT_H */

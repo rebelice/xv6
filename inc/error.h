@@ -1,7 +1,7 @@
 /* See COPYRIGHT for copyright information. */
 
-#ifndef SYS_ERROR_H
-#define SYS_ERROR_H
+#ifndef INC_ERROR_H
+#define INC_ERROR_H
 
 enum {
 	// Kernel error codes -- keep in sync with list in lib/printfmt.c.
@@ -17,4 +17,4 @@ enum {
 	MAXERROR
 };
 
-#endif	// !SYS_ERROR_H */
+#endif	// !INC_ERROR_H */

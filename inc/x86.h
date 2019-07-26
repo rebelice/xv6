@@ -1,7 +1,7 @@
-#ifndef SYS_X86_H
-#define SYS_X86_H
+#ifndef INC_X86_H
+#define INC_X86_H
 
-#include <sys/types.h>
+#include <inc/types.h>
 
 static inline void
 breakpoint(void)
@@ -261,4 +261,4 @@ xchg(volatile uint32_t *addr, uint32_t newval)
 	return result;
 }
 
-#endif /* !SYS_X86_H */
+#endif /* !INC_X86_H */

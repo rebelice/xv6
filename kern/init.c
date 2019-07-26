@@ -1,6 +1,6 @@
-#include <sys/stdio.h>
-#include <sys/string.h>
-#include <sys/assert.h>
+#include <inc/stdio.h>
+#include <inc/string.h>
+#include <inc/assert.h>
 
 #include <kern/console.h>
 

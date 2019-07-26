@@ -1,5 +1,5 @@
-#include <sys/mmu.h>
-#include <sys/memlayout.h>
+#include <inc/mmu.h>
+#include <inc/memlayout.h>
 
 pte_t entry_pgtable[NPTENTRIES];
 

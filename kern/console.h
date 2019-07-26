@@ -3,7 +3,7 @@
 #ifndef _CONSOLE_H_
 #define _CONSOLE_H_
 
-#include <sys/types.h>
+#include <inc/types.h>
 
 #define MONO_BASE	0x3B4
 #define MONO_BUF	0xB0000

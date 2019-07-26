@@ -1,7 +1,7 @@
-#ifndef SYS_STDIO_H
-#define SYS_STDIO_H
+#ifndef INC_STDIO_H
+#define INC_STDIO_H
 
-#include <sys/stdarg.h>
+#include <inc/stdarg.h>
 
 #ifndef NULL
 #define NULL	((void *) 0)
@@ -30,4 +30,4 @@ int	vfprintf(int fd, const char *fmt, va_list);
 // lib/readline.c
 char*	readline(const char *prompt);
 
-#endif /* !SYS_STDIO_H */
+#endif /* !INC_STDIO_H */

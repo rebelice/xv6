@@ -1,5 +1,5 @@
-#ifndef SYS_MMU_H
-#define SYS_MMU_H
+#ifndef INC_MMU_H
+#define INC_MMU_H
 
 /*
  * This file contains definitions for the x86 memory management unit (MMU),
@@ -146,7 +146,7 @@
 
 #else	// not __ASSEMBLER__
 
-#include <sys/types.h>
+#include <inc/types.h>
 
 // Segment Descriptors
 struct Segdesc {
@@ -314,4 +314,4 @@ struct Pseudodesc {
 
 #endif /* !__ASSEMBLER__ */
 
-#endif /* !SYS_MMU_H */
+#endif /* !INC_MMU_H */

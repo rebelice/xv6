@@ -1,6 +1,6 @@
-#include <sys/types.h>
-#include <sys/x86.h>
-#include <sys/elf.h>
+#include <inc/types.h>
+#include <inc/x86.h>
+#include <inc/elf.h>
 
 #define SECTSIZE    512
 #define ELFHDR		((struct Elf *) 0x10000) // scratch space
