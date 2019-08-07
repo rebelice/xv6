@@ -1,4 +1,3 @@
-/* See COPYRIGHT for copyright information. */
 
 #ifndef _CONSOLE_H_
 #define _CONSOLE_H_

@@ -2,18 +2,19 @@
 #include <inc/string.h>
 #include <inc/assert.h>
 
-#include <kern/console.h>
-
-void i386_init()
+void
+i386_init()
 {
     extern char edata[], end[];
 
+	// Before doing anything else, complete the ELF loading process.
+	// Clear the uninitialized global data (BSS) section of our program.
+	// This ensures that all static/global variables start out zero.
     memset(edata, 0, end - edata);
 
-    cons_init();
+	// TODO: Use *cprintf* to print "Hello, world."
 
-    cprintf("Hello world!\n");
-
+	// Spin.
     while (1);
 }
 

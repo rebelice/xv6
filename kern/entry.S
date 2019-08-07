@@ -1,5 +1,3 @@
-/* See COPYRIGHT for copyright information. */
-
 #include <inc/mmu.h>
 #include <inc/memlayout.h>
 
@@ -67,11 +65,6 @@ entry:
 	mov	$relocated, %eax
 	jmp	*%eax
 relocated:
-
-	# Clear the frame pointer register (EBP)
-	# so that once we get into debugging C code,
-	# stack backtraces will be terminated properly.
-	movl	$0x0,%ebp			# nuke frame pointer
 
 	# Set the stack pointer
 	movl	$(bootstacktop),%esp
