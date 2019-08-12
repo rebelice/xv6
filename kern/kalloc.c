@@ -15,7 +15,7 @@ struct run {
 };
 
 struct {
-	struct run *freelist;
+	struct run *free_list;
 } kmem;
 
 void
@@ -29,12 +29,12 @@ kfree(char *v)
 	memset(v, 1, PGSIZE);
 
 	r = (struct run *)v;
-	r->next = kmem.freelist;
-	kmem.freelist = r;
+	r->next = kmem.free_list;
+	kmem.free_list = r;
 }
 
 void
-freerage(void *vstart, void *vend)
+free_rage(void *vstart, void *vend)
 {
 	char *p;
 	p = ROUNDUP((char *)vstart, PGSIZE);
@@ -43,15 +43,16 @@ freerage(void *vstart, void *vend)
 }
 
 void
-kinit1(void *vstart, void *vend)
+boot_alloc_init(void)
 {
-	freerage(vstart, vend);
+	free_rage((void *)end, P2V(4*1024*1024));
+	check_free_list();
 }
 
 void
-kinit2(void *vstart, void *vend)
+alloc_init(void)
 {
-	freerage(vstart, vend);
+	free_rage(P2V(4*1024*1024), P2V(PHYSTOP));
 }
 
 char *
@@ -59,8 +60,31 @@ kalloc(void)
 {
 	struct run *r;
 
-	r = kmem.freelist;
+	r = kmem.free_list;
 	if (r)
-		kmem.freelist = r->next;
+		kmem.free_list = r->next;
 	return (char *)r;
+}
+
+// --------------------------------------------------------------
+// Checking functions.
+// --------------------------------------------------------------
+
+//
+// Check that the pages on the kmem.free_list are reasonable.
+//
+void
+check_free_list(void)
+{
+	struct run *p;
+	if (!kmem.free_list)
+		panic("'kmem.free_list' is a null pointer!");
+
+	cprintf("0x%x\n", end);
+
+	for (p = kmem.free_list; p; p = p->next) {
+		cprintf("0x%x\n", p);
+		assert((void *)p > (void *)end);
+		assert((void *)p <= P2V(4*1024*1024));
+	}
 }

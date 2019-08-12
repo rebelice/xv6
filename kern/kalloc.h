@@ -1,9 +1,12 @@
 #ifndef KERN_KALLOC_H
 #define KERN_KALLOC_H
 
-void kinit1(void *, void *);
-void kinit2(void *, void *);
+void boot_alloc_init(void);
+void alloc_init(void);
 char *kalloc(void);
 void kfree(char*);
+
+// Check function
+void check_free_list(void);
 
 #endif /* !KERN_KALLOC_H */

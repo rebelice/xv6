@@ -20,9 +20,9 @@ i386_init()
 
 	cprintf("Hello, world.\n");
 
-	kinit1((void *)end, P2V(4*1024*1024));
-	kvmalloc();
-	kinit2(P2V(4*1024*1024), P2V(PHYSTOP));
+	boot_alloc_init();
+	vm_init();
+	alloc_init();
 
 	cprintf("VM: Init success.\n");
 

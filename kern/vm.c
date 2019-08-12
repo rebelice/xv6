@@ -17,7 +17,7 @@ pde_t *kpgdir;
 // that corresponds to virtual address va.  If alloc!=0,
 // create any required page table pages.
 static pte_t *
-walkpgdir(pde_t *pgdir, const void *va, int32_t alloc)
+pgdir_walk(pde_t *pgdir, const void *va, int32_t alloc)
 {
   pde_t *pde;
   pte_t *pgtab;
@@ -42,7 +42,7 @@ walkpgdir(pde_t *pgdir, const void *va, int32_t alloc)
 // physical addresses starting at pa. va and size might not
 // be page-aligned.
 static int
-mappages(pde_t *pgdir, void *va, uint32_t size, uint32_t pa, int32_t perm)
+map_region(pde_t *pgdir, void *va, uint32_t size, uint32_t pa, int32_t perm)
 {
   char *a, *last;
   pte_t *pte;
@@ -50,7 +50,7 @@ mappages(pde_t *pgdir, void *va, uint32_t size, uint32_t pa, int32_t perm)
   a = (char*)ROUNDDOWN((uint32_t)va, PGSIZE);
   last = (char*)ROUNDDOWN(((uint32_t)va) + size - 1, PGSIZE);
   for(;;){
-    if((pte = walkpgdir(pgdir, a, 1)) == 0)
+    if((pte = pgdir_walk(pgdir, a, 1)) == 0)
       return -1;
     if(*pte & PTE_P)
       panic("remap");
@@ -76,7 +76,7 @@ static struct kmap {
 };
 
 pde_t *
-setupkvm(void)
+kvm_init(void)
 {
 	pde_t *pgdir;
 	struct kmap *k;
@@ -87,36 +87,36 @@ setupkvm(void)
 	if (P2V(PHYSTOP) > (void *)DEVSPACE)
 		panic("PHYSTOP too high");
 	for (k = kmap; k < &kmap[ARRAY_SIZE(kmap)]; k++)
-		if (mappages(pgdir, k->virt, k->phys_end - k->phys_start,
+		if (map_region(pgdir, k->virt, k->phys_end - k->phys_start,
 					(uint32_t)k->phys_start, k->perm) < 0) {
-			freevm(pgdir);
+			vm_free(pgdir);
 			return 0;
 		}
 	return pgdir;
 }
 
 void
-switchkvm(void)
+kvm_switch(void)
 {
 	lcr3(V2P(kpgdir));
 }
 
 void
-kvmalloc(void)
+vm_init(void)
 {
-	kpgdir = setupkvm();
+	kpgdir = kvm_init();
 	if (kpgdir == 0)
-		panic("kvmalloc: failure");
-	switchkvm();
+		panic("vm_init: failure");
+	kvm_switch();
 }
 
 void
-freevm(pde_t *pgdir)
+vm_free(pde_t *pgdir)
 {
 	uint32_t i;
 
 	if (pgdir == 0)
-		panic("freevm: no pgdir");
+		panic("vm_free: no pgdir");
 	for (i = 0; i < NPDENTRIES; i++) {
 		if (pgdir[i] & PTE_P) {
 			char *v = P2V(PTE_ADDR(pgdir[i]));

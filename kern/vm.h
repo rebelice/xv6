@@ -3,10 +3,10 @@
 
 #include <inc/memlayout.h>
 
-void kvmalloc(void);
-pde_t *setupkvm(void);
-void switchkvm(void);
-void freevm(pde_t *);
+void vm_init(void);
+pde_t *kvm_init(void);
+void kvm_switch(void);
+void vm_free(pde_t *);
 
 
 #endif /* !KERN_VM_H */
