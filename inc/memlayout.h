@@ -92,6 +92,9 @@
 #define IOPHYSMEM	0x0A0000
 #define EXTPHYSMEM	0x100000
 
+#define PHYSTOP 	0xE000000
+#define DEVSPACE	0xFE000000
+
 // Kernel stack.
 #define KSTACKTOP	KERNBASE
 #define KSTKSIZE	(8*PGSIZE)   		// size of a kernel stack
@@ -102,6 +105,12 @@
 #define MMIOBASE	(MMIOLIM - PTSIZE)
 
 #define ULIM		(MMIOBASE)
+
+#define V2P(a) (((uint32_t) (a)) - KERNBASE)
+#define P2V(a) ((void *)(((char *) (a)) + KERNBASE))
+
+#define V2P_WO(x) ((x) - KERNBASE)		// same as V2P, but without casts
+#define P2V_WO(x) ((x) + KERNBASE)		// same as P2V, but without casts
 
 /*
  * User read-only mappings! Anything below here til UTOP are readonly to user.

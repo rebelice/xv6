@@ -2,6 +2,10 @@
 #include <inc/string.h>
 #include <inc/assert.h>
 
+#include <kern/console.h>
+#include <kern/kalloc.h>
+#include <kern/vm.h>
+
 void
 i386_init()
 {
@@ -12,7 +16,15 @@ i386_init()
 	// This ensures that all static/global variables start out zero.
     memset(edata, 0, end - edata);
 
-	// TODO: Use *cprintf* to print "Hello, world."
+	cons_init();
+
+	cprintf("Hello, world.\n");
+
+	kinit1((void *)end, P2V(4*1024*1024));
+	kvmalloc();
+	kinit2(P2V(4*1024*1024), P2V(PHYSTOP));
+
+	cprintf("VM: Init success.\n");
 
 	// Spin.
     while (1);
