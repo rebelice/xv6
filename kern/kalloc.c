@@ -26,6 +26,23 @@ struct {
 	struct run *free_list; // Free list of physical pages
 } kmem;
 
+// Initialization happens in two phases.
+// 1. Call boot_alloc_init() whie still using entrypgdir to place just
+// the pages mapped by entrypgdir on free list.
+// 2. Call alloc_init() with the rest of the physical pages after
+// installing a full page table.
+void
+boot_alloc_init(void)
+{
+	// TODO: Your code here.
+}
+
+void
+alloc_init(void)
+{
+	// TODO: Your code here.
+}
+
 // Free the page of physical memory pointed at by v.
 void
 kfree(char *v)
@@ -52,36 +69,13 @@ free_rage(void *vstart, void *vend)
 		kfree(p);
 }
 
-// Initialization happens in two phases.
-// 1. Call boot_alloc_init() whie still using entrypgdir to place just
-// the pages mapped by entrypgdir on free list.
-// 2. Call alloc_init() with the rest of the physical pages after
-// installing a full page table.
-void
-boot_alloc_init(void)
-{
-	free_rage((void *)end, P2V(4*1024*1024));
-	check_free_list();
-}
-
-void
-alloc_init(void)
-{
-	free_rage(P2V(4*1024*1024), P2V(PHYSTOP));
-}
-
 // Allocate one 4096-byte page of physical memory.
 // Returns a pointer that the kernel can use.
 // Returns 0 if the memory cannot be allocated.
 char *
 kalloc(void)
 {
-	struct run *r;
-
-	r = kmem.free_list;
-	if (r)
-		kmem.free_list = r->next;
-	return (char *)r;
+	// TODO: Your code here.
 }
 
 // --------------------------------------------------------------
@@ -90,6 +84,8 @@ kalloc(void)
 
 //
 // Check that the pages on the kmem.free_list are reasonable.
+// TODO: There is only a simple test code here.
+// 		 Please add more test code.
 //
 void
 check_free_list(void)
@@ -103,6 +99,5 @@ check_free_list(void)
 	for (p = kmem.free_list; p; p = p->next) {
 		cprintf("0x%x\n", p);
 		assert((void *)p > (void *)end);
-		assert((void *)p <= P2V(4*1024*1024));
 	}
 }
