@@ -27,7 +27,7 @@ struct {
 } kmem;
 
 // Initialization happens in two phases.
-// 1. Call boot_alloc_init() whie still using entrypgdir to place just
+// 1. Call boot_alloc_init() while still using entrypgdir to place just
 // the pages mapped by entrypgdir on free list.
 // 2. Call alloc_init() with the rest of the physical pages after
 // installing a full page table.
@@ -61,7 +61,7 @@ kfree(char *v)
 }
 
 void
-free_rage(void *vstart, void *vend)
+free_range(void *vstart, void *vend)
 {
 	char *p;
 	p = ROUNDUP((char *)vstart, PGSIZE);
