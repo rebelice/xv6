@@ -31,7 +31,7 @@ seg_init(void)
 	// 2. The various segment selectors, application segment type bits and
 	// User DPL have been defined in kern/mmu.h;
 	// 3. You may need macro SEG() to set up segments;
-	// 4. We have implememted the C function lgdt();
+	// 4. We have implememted the C function lgdt() in inc/x86.h;
 }
 
 // Given 'pgdir', a pointer to a page directory, pgdir_walk returns
