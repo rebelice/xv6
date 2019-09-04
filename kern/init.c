@@ -5,6 +5,7 @@
 #include <kern/console.h>
 #include <kern/kalloc.h>
 #include <kern/vm.h>
+#include <kern/trap.h>
 
 void
 i386_init()
@@ -23,7 +24,7 @@ i386_init()
 	boot_alloc_init();
 	vm_init();
 	seg_init();
-	
+	trap_init();
 	alloc_init();
 
 	cprintf("VM: Init success.\n");
