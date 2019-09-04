@@ -23,6 +23,12 @@ trap_init(void)
 }
 
 void
+idt_init(void)
+{
+	lidt(idt, sizeof(idt));
+}
+
+void
 trap(struct trapframe *tf)
 {
 	// You don't need to implement this function now, but you can write

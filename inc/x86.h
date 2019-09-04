@@ -111,10 +111,18 @@ invlpg(void *addr)
 	asm volatile("invlpg (%0)" : : "r" (addr) : "memory");
 }
 
+struct gatedesc;
+
 static inline void
-lidt(void *p)
+lidt(struct gatedesc *p, int size)
 {
-	asm volatile("lidt (%0)" : : "r" (p));
+	volatile uint16_t pd[3];
+
+	pd[0] = size-1;
+	pd[1] = (unsigned)p;
+	pd[2] = (unsigned)p >> 16;
+
+	asm volatile("lidt (%0)" : : "r" (pd));
 }
 
 struct segdesc;
