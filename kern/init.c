@@ -22,6 +22,8 @@ i386_init()
 
 	boot_alloc_init();
 	vm_init();
+	seg_init();
+	
 	alloc_init();
 
 	cprintf("VM: Init success.\n");

@@ -15,6 +15,25 @@ extern char data[];
 // Kernel's page table directory.
 pde_t *kpgdir;
 
+void
+seg_init(void)
+{
+	// Map "logical" addresses to virtual addresses using identity map.
+	// Cannot share a CODE descriptor for both kernel and user
+	// because it would have to have DPL_USR, but the CPU forbids
+	// an interrupt from CPL=0 to DPL=3.
+	struct segdesc gdt[NSEGS];
+	// Your code here.
+	//
+	// Hints:
+	// 1. You should set up at least four segments: kern code, kern data,
+	// user code, user data;
+	// 2. The various segment selectors, application segment type bits and
+	// User DPL have been defined in kern/mmu.h;
+	// 3. You may need macro SEG() to set up segments;
+	// 4. We have implememted the C function lgdt();
+}
+
 // Given 'pgdir', a pointer to a page directory, pgdir_walk returns
 // a pointer to the page table entry (PTE) for linear address 'va'.
 // This requires walking the two-level page table structure.

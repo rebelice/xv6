@@ -117,10 +117,18 @@ lidt(void *p)
 	asm volatile("lidt (%0)" : : "r" (p));
 }
 
+struct segdesc;
+
 static inline void
-lgdt(void *p)
+lgdt(struct segdesc *p, int32_t size)
 {
-	asm volatile("lgdt (%0)" : : "r" (p));
+	volatile uint16_t pd[3];
+
+	pd[0] = size-1;
+	pd[1] = (unsigned)p;
+	pd[2] = (unsigned)p >> 16;
+
+	asm volatile("lgdt (%0)" : : "r" (pd));
 }
 
 static inline void
