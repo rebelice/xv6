@@ -1,6 +1,6 @@
 # 0 Lab 0 Toolchain
 
-`One week`
+`Week One`
 
 [TOC]
 
@@ -67,9 +67,10 @@ sudo apt-get install qemu
 
 To test installation, try the following commands:
 ```shell
-qemu-system-i386
+qemu-system-i386 -curses
 ```
 
+It should display a bunch of messages, ending with "No bootable device". That's ready for your working.
 
 ## 0.4 Git
 
