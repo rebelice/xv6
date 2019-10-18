@@ -78,9 +78,9 @@ map_region(pde_t *pgdir, void *va, uint32_t size, uint32_t pa, int32_t perm)
 // However this is not truly the case.
 // kvm_init() should set up page table like this:
 //
-//	KERNBASE..KERNBASE+EXTPHYSMEM: mapped to 0..EXTPHYSMEM
+//	KERNBASE..KERNBASE+EXTMEM: mapped to 0..EXTMEM
 // 									(for I/O space)
-// 	KERNBASE+EXTPHYSMEM..data: mapped to EXTPHYSMEM..V2P(data)
+// 	KERNBASE+EXTMEM..data: mapped to EXTMEM..V2P(data)
 //					for the kernel's instructions and r/o data
 // 	data..KERNBASE+PHYSTOP: mapped to V2P(data)..PHYSTOP,
 //					rw data + free physical memory

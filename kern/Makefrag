@@ -17,18 +17,10 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/entrypgdir.c \
 			kern/init.c \
 			kern/console.c \
-			kern/monitor.c \
-			kern/pmap.c \
-			kern/env.c \
-			kern/kclock.c \
-			kern/picirq.c \
 			kern/printf.c \
 			kern/trap.c \
 			kern/trapasm.S \
 			kern/vector.S \
-			kern/sched.c \
-			kern/syscall.c \
-			kern/kdebug.c \
 			kern/vm.c \
 			kern/kalloc.c \
 			lib/printfmt.c \

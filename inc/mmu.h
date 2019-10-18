@@ -62,6 +62,17 @@ struct segdesc {
 #define STA_W       0x2     // Writeable (non-executable segments)
 #define STA_R       0x2     // Readable (executable segments)
 
+#define SEG_NULLASM                                             \
+        .word 0, 0;                                             \
+        .byte 0, 0, 0, 0
+
+// The 0xC0 means the limit is in 4096-byte units
+// and (for executable segments) 32-bit mode.
+#define SEG_ASM(type,base,lim)                                  \
+        .word (((lim) >> 12) & 0xffff), ((base) & 0xffff);      \
+        .byte (((base) >> 16) & 0xff), (0x90 | (type)),         \
+                (0xC0 | (((lim) >> 28) & 0xf)), (((base) >> 24) & 0xff)
+
 // System segment type bits
 #define STS_T32A    0x9     // Available 32-bit TSS
 #define STS_IG32    0xE     // 32-bit Interrupt Gate
@@ -88,6 +99,7 @@ struct segdesc {
 #define NPDENTRIES      1024    // # directory entries per page directory
 #define NPTENTRIES      1024    // # PTEs per page table
 #define PGSIZE          4096    // bytes mapped by a page
+#define PGSHIFT			12		// log2(PGSIZE)
 
 #define PTXSHIFT        12      // offset of PTX in a linear address
 #define PDXSHIFT        22      // offset of PDX in a linear address
