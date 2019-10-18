@@ -25,9 +25,9 @@ git merge origin/lab2
 
 ### 2.1.2 Lab requirements
 
-In this lab and subsequent labs, do all of the regular exercises described in the lab. Additionally, write up brief answers to the questions posed in the lab and a short (e.g., one or two paragraph) description of what you did. Place the write-up in a file called answers-lab2.txt in the top level of your lab directory before handing in your work.
+In this lab and subsequent labs, do all of the regular exercises described in the lab. Additionally, write up brief answers to the questions posed in the lab and a short (e.g., one or two paragraph) description of what you did. Place the write-up in a file in the top level of your lab directory before handing in your work.
 
-There may have some challenge problems.  You can choose the problem you like to solve. (Some challenge problems are more challenging than others, of course!) There is no time limit for the challenge problems. There are additional scores for completing the challenge problems. You can communicate with TA before you are ready to do a challenge problem.
+There may be some challenge problems.  You can choose the problem you like to solve. (Some challenge problems are more challenging than others, of course!) There is no time limit for the challenge problems. There are additional scores for completing the challenge problems. You can communicate with TA before you are ready to do a challenge problem.
 
 ## 2.2 Physical page management
 
