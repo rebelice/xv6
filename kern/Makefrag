@@ -20,7 +20,7 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/printf.c \
 			kern/trap.c \
 			kern/trapasm.S \
-			kern/vector.S \
+			kern/vectors.S \
 			kern/vm.c \
 			kern/kalloc.c \
 			lib/printfmt.c \
