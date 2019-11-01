@@ -6,6 +6,10 @@
 #include <kern/kalloc.h>
 #include <kern/vm.h>
 #include <kern/trap.h>
+#include <kern/cpu.h>
+#include <kern/picirq.h>
+
+static void boot_aps(void);
 
 void
 i386_init()
@@ -25,12 +29,60 @@ i386_init()
 	vm_init();
 	seg_init();
 	trap_init();
+
+	mp_init();
+	lapic_init();
+	pic_init();
+	boot_aps();
+
 	alloc_init();
 
 	cprintf("VM: Init success.\n");
 
 	// Spin.
     while (1);
+}
+
+// While boot_aps is booting a given CPU, it communicates the per-core
+// stack pointer that should be loaded by mpentry.S to that CPU in
+// this variable.
+void *mpentry_kstack;
+
+static void
+boot_aps(void)
+{
+	extern unsigned char mpentry_start[], mpentry_end[];
+	void *code;
+	struct CpuInfo *c;
+
+	// Write entry code to unused memory at MPENTRY_PADDR
+	code = P2V(MPENTRY_PADDR);
+	memmove(code, mpentry_start, mpentry_end - mpentry_start);
+
+	// Boot each AP one at a time
+	for (c = cpus; c < cpus + ncpu; c++) {
+		if (c == cpus + cpunum())  // We've started already.
+			continue;
+
+		// Tell mpentry.S what stack to use 
+		mpentry_kstack = percpu_kstacks[c - cpus] + KSTKSIZE;
+		// Start the CPU at mpentry_start
+		lapic_startap(c->cpu_id, V2P(code));
+		// Wait for the CPU to finish some basic setup in mp_main()
+		while(c->cpu_status != CPU_STARTED)
+			;
+	}
+}
+
+// Setup code for APs
+void
+mp_main(void)
+{
+	// TODO: Your code here.
+	// You need to initialize something.
+
+	xchg(&thiscpu->cpu_status, CPU_STARTED); // tell boot_aps() we're up
+	for (;;);
 }
 
 /*

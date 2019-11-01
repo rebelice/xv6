@@ -13,6 +13,9 @@
 #define KERNBASE 0xF0000000         // First kernel virtual address
 #define KERNLINK (KERNBASE+EXTMEM)  // Address where kernel is linked
 
+// Physical address of startup code for non-boot CPUs (APs)
+#define MPENTRY_PADDR	0x7000
+
 #ifndef __ASSEMBLER__
 
 #include <inc/types.h>
