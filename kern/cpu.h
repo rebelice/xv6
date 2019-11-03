@@ -20,6 +20,7 @@ struct CpuInfo {
 	uint8_t cpu_id;                 // Local APIC ID; index into cpus[] below
 	volatile unsigned cpu_status;   // The status of the CPU
 	struct taskstate cpu_ts;        // Used by x86 to find stack for interrupt
+	struct segdesc gdt[NSEGS];		// x86 global descriptor table
 };
 
 // Initialized in mpconfig.c
