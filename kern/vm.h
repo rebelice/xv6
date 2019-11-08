@@ -9,6 +9,10 @@ void kvm_switch(void);
 void vm_free(pde_t *);
 
 void seg_init(void);
+void region_alloc(struct proc *p, void *va, size_t len);
+void uvm_switch(struct proc *p);
 
+void pushcli(void);
+void popcli(void);
 
 #endif /* !KERN_VM_H */

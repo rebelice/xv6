@@ -9,6 +9,8 @@
 #include <kern/vm.h>
 #include <kern/kalloc.h>
 #include <kern/console.h>
+#include <kern/proc.h>
+#include <kern/cpu.h>
 
 // Defined by kern/kernel.ld.
 extern char data[];
@@ -138,4 +140,62 @@ void
 vm_free(pde_t *pgdir)
 {
 	// TODO: your code here
+}
+
+//
+// Allocate len bytes of physical memory for proc,
+// and map it at virtual address va in the proc's address space.
+// Does not zero or otherwise initialize the mapped pages in any way.
+// Pages should be writable by user and kernel.
+// Panic if any allocation attempt fails.
+//
+void
+region_alloc(struct proc *p, void *va, size_t len)
+{
+	// TODO: Your code here.
+	// (But only if you need it for ucode_load.)
+	//
+	// Hint: It is easier to use region_alloc if the caller can pass
+	//   'va' and 'len' values that are not page-aligned.
+	//   You should round va down, and round (va + len) up.
+	//   (Watch out for corner-cases!)
+}
+
+void
+pushcli(void)
+{
+	int32_t eflags;
+
+	eflags = read_eflags();
+	cli();
+	if (thiscpu->ncli == 0)
+		thiscpu->intena = eflags & FL_IF;
+	thiscpu->ncli += 1;
+}
+
+void
+popcli(void)
+{
+	if (read_eflags() & FL_IF)
+		panic("popcli - interruptible");
+	
+	if (--thiscpu->ncli < 0)
+		panic("popcli");
+	
+	if (thiscpu->ncli == 0 && thiscpu->intena)
+		sti();
+}
+
+//
+// Switch TSS and h/w page table to correspond to process p.
+//
+void
+uvm_switch(struct proc *p)
+{
+	// TODO: your code here.
+	//
+	// Hints:
+	// - You may need pushcli() and popcli()
+	// - You need to set TSS and ltr(SEG_TSS << 3)
+	// - You need to switch to process's address space
 }

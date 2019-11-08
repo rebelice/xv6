@@ -28,6 +28,9 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/lapic.c \
 			kern/spinlock.c \
 			kern/picirq.c \
+			kern/proc.c \
+			kern/syscall.c \
+			kern/swtch.S \
 			lib/printfmt.c \
 			lib/readline.c \
 			lib/string.c
@@ -36,7 +39,7 @@ KERN_SRCFILES :=	kern/entry.S \
 KERN_SRCFILES := $(wildcard $(KERN_SRCFILES))
 
 # Binary program images to embed within the kernel.
-KERN_BINFILES := 
+KERN_BINFILES :=  user/hello
 
 KERN_OBJFILES := $(patsubst %.c, $(OBJDIR)/%.o, $(KERN_SRCFILES))
 KERN_OBJFILES := $(patsubst %.S, $(OBJDIR)/%.o, $(KERN_OBJFILES))

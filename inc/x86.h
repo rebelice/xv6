@@ -277,4 +277,16 @@ xchg(volatile uint32_t *addr, uint32_t newval)
 	return result;
 }
 
+static inline void
+cli(void)
+{
+	asm volatile("cli");
+}
+
+static inline void
+sti(void)
+{
+	asm volatile("sti");
+}
+
 #endif /* !INC_X86_H */

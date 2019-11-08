@@ -8,6 +8,7 @@
 #define DEVSPACE 0xFE000000         // Other devices are at high addresses
 
 #define KSTKSIZE (8*PGSIZE)			// Size of a kernel stack
+#define USTACKTOP 0xD0000000
 
 // Key addresses for address space layout (see kmap in vm.c for layout)
 #define KERNBASE 0xF0000000         // First kernel virtual address
