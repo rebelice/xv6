@@ -33,7 +33,7 @@ struct ptable {
 	struct proc proc[NPROC];
 };
 
-void porc_init(void);
+void proc_init(void);
 void user_init(void);
 void user_run(struct proc *p);
 void ucode_run(void);
