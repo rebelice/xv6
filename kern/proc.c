@@ -22,6 +22,15 @@ extern void trapret(void);
 void swtch(struct context **, struct context*);
 
 
+//
+// Initialize something about process, such as ptable.lock
+//
+void
+proc_init(void)
+{
+	// TODO: your code here
+}
+
 // Look in the process table for an UNUSED proc.
 // If found, change state to EMBRYO and initialize
 // state required to run in the kernel.
