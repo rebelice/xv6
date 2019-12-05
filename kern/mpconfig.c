@@ -14,6 +14,7 @@ struct CpuInfo cpus[NCPU];
 struct CpuInfo *bootcpu;
 int ismp;
 int ncpu;
+uint8_t ioapicid;
 
 // Per-CPU kernel stacks
 unsigned char percpu_kstacks[NCPU][KSTKSIZE]
@@ -58,6 +59,14 @@ struct mpproc {         // processor table entry [MP 4.3.1]
 	uint32_t feature;               // feature flags from CPUID instruction
 	uint8_t reserved[8];
 } __attribute__((__packed__));
+
+struct mpioapic {		// I/O APIC table entry
+	uint8_t type;					// entry type (2)
+	uint8_t apicno;					// I/O APIC id
+	uint8_t version;				// I/O APIC version
+	uint8_t flags;					// I/O APIC flags
+	uint32_t *addr;					// I/O APIC address
+}__attribute__((__packed__));
 
 // mpproc flags
 #define MPPROC_BOOT 0x02                // This mpproc is the bootstrap processor
@@ -168,6 +177,7 @@ mp_init(void)
 	struct mp *mp;
 	struct mpconf *conf;
 	struct mpproc *proc;
+	struct mpioapic *ioapic;
 	uint8_t *p;
 	unsigned int i;
 
@@ -194,6 +204,10 @@ mp_init(void)
 			continue;
 		case MPBUS:
 		case MPIOAPIC:
+			ioapic = (struct mpioapic *)p;
+			ioapicid = ioapic->apicno;
+			p += sizeof(struct mpioapic);
+			continue;
 		case MPIOINTR:
 		case MPLINTR:
 			p += 8;

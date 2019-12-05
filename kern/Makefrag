@@ -31,6 +31,8 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/proc.c \
 			kern/syscall.c \
 			kern/swtch.S \
+			kern/ioapic.c \
+			kern/ide.c \
 			lib/printfmt.c \
 			lib/readline.c \
 			lib/string.c

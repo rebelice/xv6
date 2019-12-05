@@ -33,6 +33,7 @@ i386_init()
 	mp_init();
 	lapic_init();
 	pic_init();
+	ioapic_init();
 	boot_aps();
 
 	alloc_init();
