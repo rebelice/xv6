@@ -7,7 +7,7 @@ struct buf {
   uint32_t blockno;
   struct sleeplock lock;
   //TODO: a queue or other data structure to manage buf
-  uchar data[BSIZE];
+  uint8_t data[BSIZE];
 };
 #define B_VALID 0x2  // buffer has been read from disk
 #define B_DIRTY 0x4  // buffer needs to be written to disk

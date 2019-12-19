@@ -33,6 +33,10 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/swtch.S \
 			kern/ioapic.c \
 			kern/ide.c \
+			kern/bio.c \
+			kern/block.c \
+			kern/log.c \
+			kern/sleeplock.c \
 			lib/printfmt.c \
 			lib/readline.c \
 			lib/string.c
