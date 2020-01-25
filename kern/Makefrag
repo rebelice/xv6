@@ -37,6 +37,8 @@ KERN_SRCFILES :=	kern/entry.S \
 			kern/block.c \
 			kern/log.c \
 			kern/sleeplock.c \
+			kern/file.c \
+			kern/fs.c \
 			lib/printfmt.c \
 			lib/readline.c \
 			lib/string.c
